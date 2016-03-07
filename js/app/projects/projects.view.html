@@ -1,0 +1,29 @@
+<h1>Projects <a href="#" class="add" ng-click="formProject = !formProject">+</a></h1>
+<div ng-model="formProject" ng-init="formProject = false" ng-show="formProject">
+	<form ng-submit="p.submit()">
+		<input name="id" type="hidden" ng-model="p.id">
+		<div>
+			<label>
+				Title
+			</label>
+			<input name="title" type="text" ng-model="p.title">
+		</div>
+		<div>
+			<label>
+				Manager
+			</label>
+			<select name="manager" ng-model="p.manager">
+				<option>sdfg</option>
+			</select>
+		</div>
+		<div>
+			<button type="submit">{{p.id ? 'Save' : 'Add'}}</button>
+		</div>
+	</form>
+</div>
+<div ng-repeat="article in arts.articles">
+  <h4 class="title">
+    <small class="date">{{article.date}}</small> - <small class="time">{{article.time}}</small>
+    &nbsp;<a href="/{{article.category_url}}/{{article.url}}">{{article.title}}</a>
+  </h4>
+</div>

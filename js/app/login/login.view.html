@@ -1,0 +1,18 @@
+
+<div ng-controller="LoginCtrl">
+  
+</div>
+<h1>Login {{user}}</h1>
+<form ng-submit="main.runLogin()">
+<div>{{main.error}}</div>
+<div>
+  <label>Email</label>
+  <input name="email" type="email" ng-model="main.email" placeholder="Email">
+</div>
+<div>
+  <label>Password</label>
+  <input name="password" type="password" ng-model="main.password" placeholder="Password">
+</div>
+<button ng-class="main.btn" class="btn">Login</button>
+<a href="/signup" class="btn">Signup</a>
+</form>

@@ -1,0 +1,197 @@
+
+.container {
+  width: 980px;
+  margin: 0 auto;
+  background: white;
+  min-height: 100vh;
+}
+
+.content {
+  overflow: hidden;
+  margin: 0px 0;
+  padding: 40px 20px 40px;
+  background: #fff;
+  word-break: break-word;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  width: 980px;
+  background: whitesmoke;
+}
+
+header .logo {
+  display: block;
+  float: left;
+  background: #2C89DC;
+  padding: 10px 10px;
+  text-decoration: none;
+  color: white!important;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 4px;
+  position: relative;
+}
+
+header .logo:before {
+  background: white;
+  display: block;
+  position: absolute;
+  content: '';
+  width: 11px;
+  height: 11px;
+  border-radius: 10px;
+  left: 80px;
+  top: 10px;
+}
+
+header .logo span {
+  padding: 10px 10px;
+  background: #6FB4F1;
+  display: inline-block;
+  margin: -10px -10px -10px 0px;
+}
+
+header #categories {
+  display: block;
+  float: left;
+  text-align: left;
+  padding: 0 15px;
+}
+
+header #categories a {
+  display: inline-block;
+  padding: 8px 10px;
+}
+
+header .menu-top {
+  float: right;
+  display: block;
+  padding: 0px 10px 0px 10px;
+  background: #eee;
+}
+
+header .menu-top a {
+  display: inline-block;
+  font-size: 14px;
+  padding: 8px 10px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0px;
+  width: 940px;
+  padding: 10px 20px;
+  font-size: 11px;
+  background: #666;
+  color: #ccc;
+  z-index: 1;
+}
+
+footer a {
+  color: white !important;
+}
+
+footer .footer-menu {
+  float: right;
+}
+
+page {
+  display: block;
+}
+
+page:empty {
+  height: 100px;
+}
+
+page:empty:before {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  border: 2px solid red;
+}
+
+.admin_articles {
+  
+}
+
+.admin_articles .admin_article {
+
+}
+
+.admin_articles .admin_article .title {
+
+}
+
+.admin_articles .admin_article .content {
+
+}
+
+.js {
+  text-decoration: none;
+  border-bottom: 1px dashed #0088cc;
+}
+
+form[name="addArticleForm"] {
+  position: relative;
+}
+
+.preload {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+}
+.preload .preload-box {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  border: 1px solid #fff;
+  left: 50%;
+  top: 50%;
+  margin: -5px 0 0 -50px;
+}
+.preload .preload-box .preload-handler {
+  position: absolute;
+  width: 0%;
+  height: 10px;
+  background: rgba(255,255,255,0.5);
+}
+
+.dropdown {
+  position: absolute;
+  top: 35px;
+  background: whitesmoke;
+  padding: 10px;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+  width: 200px;
+  right: 0;
+}
+
+.dropdown.dropdown-menu-top {
+  position: absolute;
+  top: 46px;
+  background: whitesmoke;
+  padding: 10px;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+  width: 200px;
+  right: 0;
+}
+
+.dropdown.dropdown-menu-top:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border: 15px solid transparent;
+  border-bottom-color: whitesmoke;
+  position: absolute;
+  top: -26px;
+  right: 11px;
+}
