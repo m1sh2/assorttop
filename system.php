@@ -15,6 +15,11 @@ $ENV = 'loc';
 
 	<!-- Config -->
 	<script type="text/javascript">
+		(function() {
+			var v = '0.0.1';
+			console.log("%c ASSORT " + "%c TOP " + "%c %s ", "background: #2C89DC; color: #fff;", "background: #6FB4F1; color: #fff;", "background: #ccc; color: #333;", v);
+		})();
+		
 		var lang = 'ru';
 	</script>
 
