@@ -1,7 +1,84 @@
-<h1>Tasks</h1>
-<div ng-repeat="article in arts.articles">
-  <h4 class="title">
-    <small class="date">{{article.date}}</small> - <small class="time">{{article.time}}</small>
-    &nbsp;<a href="/{{article.category_url}}/{{article.url}}">{{article.title}}</a>
-  </h4>
+<h1>Tasks <a href="#" class="add" ng-click="addForm = !addForm">+</a></h1>
+
+<div ng-model="addForm" ng-init="addForm = false" ng-show="addForm">
+	<form id="add_form" ng-submit="t.submit()">
+		<input name="id" type="hidden" ng-model="t.id">
+		<div>
+			<label>
+				Description
+			</label>
+			<textarea name="title" ng-model="t.form.title"></textarea>
+		</div>
+		<div>
+			<label>
+				Feature
+			</label>
+			<select name="feature_id" ng-model="t.form.feature_id">
+				<optgroup ng-repeat="project in t.projectsFeatures" label="{{project[0].project_title}}">
+					<option value="{{feature.id}}" ng-repeat="feature in project">{{feature.title}}</option>
+				</optgroup>
+			</select>
+		</div>
+		<div>
+			<label>
+				Time plan (hours)
+			</label>
+			<input name="time_plan" type="text" ng-model="t.form.time_plan">
+		</div>
+		<div>
+			<label>
+				Developers
+			</label>
+			<div class="drow">
+				<div class="dcol12">
+					<div ng-repeat="user in t.usersDev" ng-hide="t.usersInTask(user.id)" ng-click="t.addUsersTask(user.id)">
+		  				{{user.name}}
+					</div>
+				</div>
+				<div class="dcol12">
+					<div ng-repeat="user in t.usersDev" ng-show="t.usersInTask(user.id)" ng-click="t.removeUsersTask(user.id)">
+		  				{{user.name}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<label>
+				QA
+			</label>
+			<div class="drow">
+				<div class="dcol12">
+					<div ng-repeat="user in t.usersQA" ng-hide="t.usersInTask(user.id)" ng-click="t.addUsersTask(user.id)">
+		  				{{user.name}}
+					</div>
+				</div>
+				<div class="dcol12">
+					<div ng-repeat="user in t.usersQA" ng-show="t.usersInTask(user.id)" ng-click="t.removeUsersTask(user.id)">
+		  				{{user.name}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<label>
+				State
+			</label>
+			<select name="state" ng-model="t.form.state">
+				<option value="{{state.id}}" ng-repeat="state in t.statesTasks">{{state.title}}</option>
+			</select>
+		</div>
+		<div>
+			<button type="submit">{{t.id ? 'Save' : 'Add'}}</button>
+		</div>
+	</form>
+</div>
+
+<div>
+	<div ng-repeat="feature in t.tasks" ng-show="t.tasks.length > 0">
+		{{feature.title}}
+	</div>
+
+	<h3 ng-show="t.tasks.length == 0">
+		Empty
+	</h3>
 </div>

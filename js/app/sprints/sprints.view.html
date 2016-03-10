@@ -1,0 +1,63 @@
+<h1>Sprints <a href="#" class="add" ng-click="addForm = !addForm">+</a></h1>
+
+<div ng-model="addForm" ng-init="addForm = false" ng-show="addForm">
+	<form id="add_form" ng-submit="s.submit()">
+		<input name="id" type="hidden" ng-model="s.form.id">
+		<div>
+			<label>
+				Title
+			</label>
+			<input name="title" type="text" ng-model="s.form.title">
+		</div>
+		<div>
+			<label>
+				Team
+			</label>
+			<select name="team" ng-model="s.form.team">
+				<option value="{{team.id}}" ng-repeat="team in s.teams">{{team.title}}</option>
+			</select>
+		</div>
+		<div>
+			<label>
+				Tasks
+			</label>
+			<div class="drow">
+				<div class="dcol12">
+					<div ng-repeat="task in s.tasks" ng-hide="s.taskInSprint(task.id)" ng-click="s.addTaskSprint(task.id)">
+		  				{{task.title}}
+					</div>
+				</div>
+				<div class="dcol12">
+					<div ng-repeat="task in s.tasks" ng-show="s.taskInSprint(task.id)" ng-click="s.removeTaskSprint(task.id)">
+		  				{{task.title}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<label>
+				Date start
+			</label>
+			<input name="date_start" type="text" ng-model="s.form.date_start">
+		</div>
+		<div>
+			<label>
+				Date end
+			</label>
+			<input name="date_end" type="text" ng-model="s.form.date_end">
+		</div>
+		<div>
+			<button type="submit">{{s.form.id ? 'Save' : 'Add'}}</button>
+		</div>
+	</form>
+</div>
+
+<div>
+	<div ng-repeat="sprint in s.sprints" ng-show="s.sprints.length > 0">
+		{{sprint.title}}
+	</div>
+
+	<h3 ng-show="s.sprints.length == 0">
+		Empty
+	</h3>
+</div>

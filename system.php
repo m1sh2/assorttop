@@ -40,6 +40,7 @@ $ENV = 'loc';
 	<script src="http://assort.<?php echo $ENV?>/js/app/projects/projects.controller.js"></script>
 	<script src="http://assort.<?php echo $ENV?>/js/app/features/features.controller.js"></script>
 	<script src="http://assort.<?php echo $ENV?>/js/app/tasks/tasks.controller.js"></script>
+	<script src="http://assort.<?php echo $ENV?>/js/app/sprints/sprints.controller.js"></script>
 	<script src="http://assort.<?php echo $ENV?>/js/app/article/article.controller.js"></script>
 	<script src="http://assort.<?php echo $ENV?>/js/app/admin/admin.controller.js"></script>
 	<script src="http://assort.<?php echo $ENV?>/js/app/login/login.controller.js"></script>

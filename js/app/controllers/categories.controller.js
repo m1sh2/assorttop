@@ -16,8 +16,12 @@ function ArticlesCtrl($scope, $http, $routeParams, $sce) {
   	title: 'Features'
   });
   cats.categories.push({
-  	url: '/tasks',
-  	title: 'Tasks'
+    url: '/tasks',
+    title: 'Tasks'
+  });
+  cats.categories.push({
+  	url: '/sprints',
+  	title: 'Sprints'
   });
   
   // $http.get('api.php?act=getCategories').then(function(result) {

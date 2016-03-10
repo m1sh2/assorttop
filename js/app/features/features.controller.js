@@ -3,19 +3,47 @@
 app.controller('FeaturesCtrl', ['$scope', '$http', '$routeParams', '$sce', FeaturesCtrl]);
 
 function FeaturesCtrl($scope, $http, $routeParams, $sce) {
-  // console.info(1234, $routeParams.category);
   var f = this;
-  f.category_url = $routeParams.category;
-  f.category = {};
-  // $http.get('api.php?act=getArticles&category_url=' + arts.category_url).then(function(result) {
-  //   if (result.data.error) {
-  //     arts.articles = [];
-  //     arts.category.title = _txt(result.data.error);
-  //   } else {
-  //     arts.articles = result.data.articles;
-  //     arts.category = result.data.category;
-  //   }
-    
-  //   // $scope.categories = result.data;
-  // });
+  f.form = {};
+  f.features = [];
+  f.projects = [];
+
+  f.submit = function(form) {
+    // console.info(form, f.id, f.title, f.project_id, f.user_id);
+    $http.get('api.php?act=save&act2=feature&data=' + Base64.encode(JSON.stringify({
+      id: f.form.id,
+      title: Base64.encode(f.form.title),
+      project_id: f.form.project_id
+    }))).then(function(result) {
+      // console.info(result);
+      get();
+      $scope.addForm = false;
+      document.getElementById('add_form').reset();
+      formReset();
+    });
+  }
+
+  formReset();
+  get();
+  getProjects();
+
+  function formReset() {
+    f.form.id = 0;
+    f.form.title = '';
+    f.form.project_id = 0;
+  }
+
+  function get() {
+    $http.get('api.php?act=get&act2=features&data=' + Base64.encode(JSON.stringify({start: 0}))).then(function(result) {
+      // console.info(result);
+      f.features = result.data;
+    });
+  }
+
+  function getProjects() {
+    $http.get('api.php?act=get&act2=projects&data=' + Base64.encode(JSON.stringify({start: -1}))).then(function(result) {
+      // console.info(result);
+      f.projects = result.data;
+    });
+  }
 }

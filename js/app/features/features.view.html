@@ -1,7 +1,34 @@
-<h1>Features</h1>
-<div ng-repeat="article in arts.articles">
-  <h4 class="title">
-    <small class="date">{{article.date}}</small> - <small class="time">{{article.time}}</small>
-    &nbsp;<a href="/{{article.category_url}}/{{article.url}}">{{article.title}}</a>
-  </h4>
+<h1>Features <a href="#" class="add" ng-click="addForm = !addForm">+</a></h1>
+
+<div ng-model="addForm" ng-init="addForm = false" ng-show="addForm">
+	<form id="add_form" ng-submit="f.submit()">
+		<input name="id" type="hidden" ng-model="f.form.id">
+		<div>
+			<label>
+				Title
+			</label>
+			<input name="title" type="text" ng-model="f.form.title">
+		</div>
+		<div>
+			<label>
+				Project
+			</label>
+			<select name="project_id" ng-model="f.form.project_id">
+				<option value="{{project.id}}" ng-repeat="project in f.projects">{{project.title}}</option>
+			</select>
+		</div>
+		<div>
+			<button type="submit">{{f.form.id ? 'Save' : 'Add'}}</button>
+		</div>
+	</form>
+</div>
+
+<div>
+	<div ng-repeat="feature in f.features" ng-show="f.features.length > 0">
+		{{feature.title}}
+	</div>
+
+	<h3 ng-show="f.features.length == 0">
+		Empty
+	</h3>
 </div>

@@ -69,6 +69,16 @@ app.config(['$routeProvider', '$locationProvider', 'AnalyticsProvider', '$sceDel
         controller: 'TasksCtrl',
         controllerAs: 't'
       }).
+      when('/sprints', {
+        templateUrl: 'http://assort.' + ENV + '/js/app/sprints/sprints.view.html',
+        controller: 'SprintsCtrl',
+        controllerAs: 's'
+      }).
+      when('/sprints/:id', {
+        templateUrl: 'http://assort.' + ENV + '/js/app/sprints/sprints.view.html',
+        controller: 'SprintsCtrl',
+        controllerAs: 's'
+      }).
       // when('/:category/:article', {
       //   templateUrl: 'http://assort.' + ENV + '/js/app/article/article.view.html',
       //   controller: 'ArticleCtrl',
