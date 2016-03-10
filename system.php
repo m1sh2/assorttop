@@ -1,6 +1,8 @@
 <?php
 session_start();
-$ENV = 'loc';
+$host = $_SERVER['HTTP_HOST'];
+$host = explode('.', $host);
+$ENV = $host[count($host) - 1];
 ?><!DOCTYPE html>
 <html ng-app="ASSORTTOP">
 <head>
