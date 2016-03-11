@@ -1,4 +1,8 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+//header('Access-Control-Allow-Methods' 'GET, POST, OPTIONS, DELETE, PUT');
+//header('Access-Control-Allow-Credentials' 'true');
+//header('Access-Control-Allow-Headers' 'User-Agent,Keep-Alive,Content-Type');
 session_start();
 $host = $_SERVER['HTTP_HOST'];
 $host = explode('.', $host);
@@ -21,7 +25,7 @@ $ENV = $host[count($host) - 1];
 			var v = '0.0.1';
 			console.log("%c ASSORT " + "%c TOP " + "%c %s ", "background: #2C89DC; color: #fff;", "background: #6FB4F1; color: #fff;", "background: #ccc; color: #333;", v);
 		})();
-		
+		var ENV = '<?php echo $ENV;?>';
 		var lang = 'ru';
 	</script>
 
@@ -34,7 +38,7 @@ $ENV = $host[count($host) - 1];
 	<script src="http://assort.<?php echo $ENV?>/js/libs/base64.js"></script>
 	<script src="http://assort.<?php echo $ENV?>/js/libs/preload.js"></script>
 	<script src="http://assort.<?php echo $ENV?>/js/_txt.js"></script>
-	
+
 	<!-- App -->
 	<script src="http://assort.<?php echo $ENV?>/js/app/config.js"></script>
 	<script src="http://assort.<?php echo $ENV?>/js/app/router.js"></script>

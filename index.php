@@ -1,4 +1,7 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Credentials' 'true');
+
 session_start();
 $host = $_SERVER['HTTP_HOST'];
 $host = explode('.', $host);
@@ -24,7 +27,7 @@ $ENV = $host[count($host) - 1];
 	<script src="http://assort.<?php echo $ENV?>/js/libs/base64.js"></script>
 	<script src="http://assort.<?php echo $ENV?>/js/libs/preload.js"></script>
 	<script src="http://assort.<?php echo $ENV?>/js/_txt.js"></script>
-</head>	
+</head>
 <body>
 <div class="container">
 	<header>

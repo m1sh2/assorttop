@@ -28,9 +28,9 @@ function ProjectsCtrl($scope, $http, $routeParams, $sce) {
   getManagers();
 
   function formReset() {
-    t.form.id = 0;
-    t.form.title = '';
-    t.form.project_id = 0;
+    p.form.id = 0;
+    p.form.title = '';
+    p.form.project_id = 0;
   }
 
   function get() {
@@ -46,5 +46,5 @@ function ProjectsCtrl($scope, $http, $routeParams, $sce) {
       p.managers = result.data;
     });
   }
-  
+
 }

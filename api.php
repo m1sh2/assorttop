@@ -3,7 +3,7 @@ session_start();
 // $mysql_link = mysql_connect('datsko.mysql.ukraine.com.ua', 'datsko_todaynews', 'rvbef8vy');
 
 require_once('./php/transliteration/JTransliteration.php');
-
+require_once('./db.php');
 /* return name of current default database */
 // if ($result = $mysqli->query("SELECT DATABASE()")) {
 //     $row = $result->fetch_row();
@@ -32,30 +32,7 @@ $act3 = isset($_POST['act3']) ? $_POST['act3'] : $_GET['act3'];
 // echo $utf->toAscii($data->title);
 // exit();
 
-function q($query) {
-  // $mysqli = new mysqli('datsko.mysql.ukraine.com.ua', 'datsko_todaynews', 'rvbef8vy', 'datsko_todaynews');
-  $mysqli = new mysqli('localhost', 'root', '', 'assorttop');
 
-  if ($mysqli->connect_errno) {
-    throw new Exception("Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error);
-  }
-
-  if (!$mysqli->set_charset("utf8")) {
-    throw new Exception("Error loading character set utf8: %s\n", $mysqli->error);
-    exit();
-  } else {
-    // printf("Current character set: %s\n", $mysqli->character_set_name());
-  }
-  // echo $query;
-  $result = $mysqli->query($query);
-  if (!$result) {
-    echo $query;
-    throw new Exception("Database Error [{$mysqli->errno}] {$mysqli->error}, (query: $query)");
-  } else {
-    return substr($query, 0, 6) == "INSERT" ? $mysqli->insert_id : $result;
-  }
-  $mysqli->close();
-}
 
 function GUI($length = 32) {
   $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -220,7 +197,7 @@ switch($act) {
     $data = json_decode(base64_decode($_REQUEST['data']));
     $rows = array();
     switch ($act2) {
-      
+
       case 'projects':
         $result = q("SELECT * FROM projects ORDER BY title ASC " . ($data->start > -1 ? "LIMIT " . $data->start . ", 20" : "") . "");
         while ($row = $result->fetch_assoc()) {
@@ -235,7 +212,7 @@ switch($act) {
           );
         }
         break;
-      
+
       case 'features':
         $result = q("SELECT * FROM features ORDER BY title ASC " . ($data->start > -1 ? "LIMIT " . $data->start . ", 20" : "") . "");
         while ($row = $result->fetch_assoc()) {
@@ -250,7 +227,7 @@ switch($act) {
           );
         }
         break;
-      
+
       case 'teams':
         $result = q("SELECT * FROM teams ORDER BY id ASC " . ($data->start > -1 ? "LIMIT " . $data->start . ", 20" : "") . "");
         while ($row = $result->fetch_assoc()) {
@@ -261,7 +238,7 @@ switch($act) {
           );
         }
         break;
-      
+
       case 'sprints':
         $result = q("SELECT * FROM sprints ORDER BY date_start ASC " . ($data->start > -1 ? "LIMIT " . $data->start . ", 20" : "") . "");
         while ($row = $result->fetch_assoc()) {
@@ -278,7 +255,7 @@ switch($act) {
           );
         }
         break;
-      
+
       case 'tasks':
         $result = q("SELECT * FROM tasks ORDER BY title ASC " . ($data->start > -1 ? "LIMIT " . $data->start . ", 20" : "") . "");
         while ($row = $result->fetch_assoc()) {
@@ -295,7 +272,7 @@ switch($act) {
           );
         }
         break;
-      
+
       case 'tasksfree':
         $result = q("SELECT t.*
           FROM tasks AS t
@@ -318,7 +295,7 @@ switch($act) {
           );
         }
         break;
-      
+
       case 'features_projects':
         $result = q("SELECT f.*, p.title AS project_title
           FROM features AS f
@@ -350,7 +327,7 @@ switch($act) {
         //   $rows[$value['project_id']][]
         // }
         break;
-      
+
       case 'states':
         switch ($act3) {
 
@@ -377,7 +354,7 @@ switch($act) {
             break;
         }
         break;
-      
+
       case 'users':
         switch ($act3) {
 
@@ -454,21 +431,21 @@ switch($act) {
   //         '" . date('Y-m-d H:i:s') . "',
   //         '" . $user['id'] . "'
   //       )");
-      
+
   //     // echo json_encode([$result, 123, $data, $mysqli->insert_id]);
   //     echo json_encode(['code' => $start . $session_id . $end, 'user' => $user->email]);
   //   } else {
   //     echo json_encode(['error' => 'Error']);
   //   }
-    
 
-    
+
+
   //   break;
 
   // case 'runSignup':
   //   $data = json_decode(base64_decode($_REQUEST['data']));
   //   $result = q("INSERT INTO users (email) VALUES ('" . $data->title . "')");
-    
+
   //   echo json_encode([$result, 123, $data, $mysqli->insert_id]);
   //   break;
 
@@ -496,7 +473,7 @@ switch($act) {
   //     $result = q("SELECT a.* FROM articles AS a
   //       WHERE a.category = '" . $category['id'] . "' AND a.state = 1
   //       ORDER BY a.datecreated DESC");
-      
+
   //     $articles = array();
   //     while ($article = $result->fetch_assoc()) {
   //       array_push($articles, array(
@@ -524,7 +501,7 @@ switch($act) {
   //     ORDER BY a.datecreated DESC
   //     LIMIT 10");
   //   // $result = q("SELECT a.* FROM articles AS a WHERE a.category = 2 ORDER BY a.datecreated DESC");
-    
+
   //   $rows = array();
   //   while ($row = $result->fetch_assoc()) {
   //     array_push($rows, array(
@@ -548,7 +525,7 @@ switch($act) {
   //     ORDER BY a.datecreated DESC
   //     LIMIT 10");
   //   // $result = q("SELECT a.* FROM articles AS a WHERE a.category = 2 ORDER BY a.datecreated DESC");
-    
+
   //   $rows = array();
   //   while ($row = $result->fetch_assoc()) {
   //     array_push($rows, array(
@@ -575,7 +552,7 @@ switch($act) {
   //     WHERE c.url = '" . $_GET['category'] . "' AND a.url = '" . $_GET['article'] . "'
   //     ORDER BY a.datecreated DESC");
   //   // $result = q("SELECT a.* FROM articles AS a WHERE a.category = 2 ORDER BY a.datecreated DESC");
-    
+
   //   $rows = array();
   //   while ($row = $result->fetch_assoc()) {
   //     array_push($rows, array(
@@ -591,8 +568,8 @@ switch($act) {
   //   break;
 
   // case 'addArticle':
-    
-      
+
+
   //   if (isset($_REQUEST['part'])) {
   //     if (!isset($_SESSION['data'])) {
   //       $_SESSION['data'] = '';
@@ -607,7 +584,7 @@ switch($act) {
   //       $finish = false;
   //       $data = json_decode(base64_decode($_REQUEST['data']));
   //     }
-      
+
   //     $url = strtolower(str_replace(' ', '-', preg_replace('!\s+!', ' ', preg_replace("/[^a-zA-Z0-9 ]+/", "", JTransliteration::transliterate(base64_decode($data->title))))));
   //     // echo $url;
   //     // exit();
@@ -637,10 +614,10 @@ switch($act) {
   //         '" . $data->state . "'
   //         )");
   //     }
-      
 
-      
-      
+
+
+
   //     // $rows = array();
   //     // while ($row = $result->fetch_assoc()) {
   //     //   array_push($rows, array(
@@ -681,7 +658,7 @@ switch($act) {
   //       $result = q("SELECT a.* FROM articles AS a
   //         WHERE a.id = '" . $_REQUEST['id'] . "'");
   //       // $result = q("SELECT a.* FROM articles AS a WHERE a.category = 2 ORDER BY a.datecreated DESC");
-        
+
   //       $rows = array();
   //       while ($row = $result->fetch_assoc()) {
   //         array_push($rows, array(
@@ -726,7 +703,7 @@ switch($act) {
   //     '" . $data->email . "',
   //     '" . crypt($data->password, $data->password) . "'
   //     )");
-    
+
   //   // $rows = array();
   //   // while ($row = $result->fetch_assoc()) {
   //   //   array_push($rows, array(
